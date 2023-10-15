@@ -4,8 +4,8 @@ Servo servoX, servoY;
 
 int stop = 0;
 
-int desiredX[] = {60, 100};
-int desiredY[] = {15, 70};
+int desiredX[] = {65, 95};
+int desiredY[] = {15, 50};
 
 int servoPinX = 2;
 int servoPinY = 6;
@@ -20,7 +20,7 @@ int servoYMax = 105;
 
 float center[] = {
   ((servoXMax - servoXMin) / 2) - 8,
-  (servoYMax - servoYMin) / 2 + 15
+  ((servoYMax - servoYMin) / 2) + 15
 };
 
 float currentPosition[] = {
@@ -60,7 +60,7 @@ void loop() {
   move(
     random(desiredX[0], desiredX[1]),
     random(desiredY[0], desiredY[1]),
-    random(20, 200)
+    random(50, 250)
   );
 
   delay(random(100));
