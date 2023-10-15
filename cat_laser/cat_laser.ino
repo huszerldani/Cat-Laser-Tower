@@ -4,8 +4,8 @@ Servo servoX, servoY;
 
 int stop = 0;
 
-int desiredX[] = {70, 110};
-int desiredY[] = {10, 60};
+int desiredX[] = {60, 100};
+int desiredY[] = {15, 70};
 
 int servoPinX = 2;
 int servoPinY = 6;
@@ -18,9 +18,14 @@ int servoXMax = 180;
 int servoYMin = 10;
 int servoYMax = 105;
 
+float center[] = {
+  ((servoXMax - servoXMin) / 2) - 8,
+  (servoYMax - servoYMin) / 2 + 15
+};
+
 float currentPosition[] = {
-  (servoXMax - servoXMin) / 2,
-  (servoYMax - servoYMin) / 2
+  center[0],
+  center[1]
 };
 
 void setup() {
@@ -31,8 +36,18 @@ void setup() {
 
   randomSeed(analogRead(0));
 
-  setX(currentPosition[0]);
-  setY(currentPosition[1]);
+  setX(center[0]);
+  setY(center[1]);
+
+  delay(2000);
+  
+  move(center[0], center[1] + 30, 50);
+  move(center[0], center[1] - 30, 50);
+  move(center[0], center[1] + 30, 50);
+  move(center[0], center[1] - 30, 50);
+
+  delay(200);
+  move(center[0], center[1], 150);
 
   delay(1000);
 }
@@ -42,12 +57,10 @@ void loop() {
     return;
   }
 
-  randomSeed(analogRead(0));
-
   move(
-    desiredX[0] + random(desiredX[1] - desiredX[0]),
-    desiredY[0] + random(desiredY[1] - desiredY[0]),
-    random(300)
+    random(desiredX[0], desiredX[1]),
+    random(desiredY[0], desiredY[1]),
+    random(20, 200)
   );
 
   delay(random(100));
